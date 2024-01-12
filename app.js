@@ -41,7 +41,6 @@ app.get("/login", userRoute);
 app.post("/login", userRoute);
 ///Dashboard Page Routes
 app.get("/dashboard", userRoute);
-// app.post("/register",userRoute)
 /////add balance route
 app.get("/dashboard/:id/editbal", userRoute);
 app.post("/dashboard/:id/editbal", userRoute);
@@ -56,8 +55,8 @@ app.get("/dashboard/chatUser", userRoute);
 ///////////logout route
 app.post("/dashboard/logout", userRoute);
 ///////////forget route
-// app.get("/forget", userRoute);
-// app.post("/forget", userRoute);
+app.get("/forget", userRoute);
+app.post("/forget", userRoute);
 ////////
 /////////////////               All User Routes End                  //////////////////////////////
 
@@ -74,7 +73,7 @@ app.get("/admin/dashboard", adminRoute);
 app.get("/admin/dashboard/users", adminRoute);
 ////transition
 app.get("/admin/dashboard/transition", adminRoute);
-////show all users
+////show all users AND Edit Routs
 app.get("/admin/dashboard/allusers", adminRoute);
 app.get("/admin/dashboard/:id/edit", adminRoute);
 app.post("/admin/dashboard/:id/edit", adminRoute);

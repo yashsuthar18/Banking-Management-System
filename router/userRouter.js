@@ -19,7 +19,7 @@ router.route('/dashboard/chatUser').get(UserController.ChatPageView)
 //////////logout Route
 router.route('/dashboard/logout').post(UserController.logOutRoute)
 //////////forget Route
-// router.route('/forget').get(UserController.forgetPassword).post(UserController.forgetPasswordPost)
+router.route('/forget').get(UserController.forgetPassword).post(UserController.forgetPasswordPost)
 
 
 

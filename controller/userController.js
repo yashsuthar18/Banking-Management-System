@@ -5,7 +5,7 @@ const uniqid = require("uniqid");
 const registerValidation = require("../models/joiSchema/registerValidationJoi");
 const Transition = require("../models/transitionModel");
 const Chat = require("../models/chatModel");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 //////Joi Schema Register Validation User
 module.exports.validationSchema = async (req, res, next) => {
@@ -13,7 +13,6 @@ module.exports.validationSchema = async (req, res, next) => {
   const { error } = await registerValidation.validate(req.body);
   if (error) {
     res.status(404).send({ message: error.message });
-    // res.redirect("/register");
   } else {
     return next();
   }
@@ -189,10 +188,6 @@ module.exports.transferBalancedone = async (req, res) => {
     } else {
       res.status(404).json(error.message);
     }
-
-    //////////////////////////
-
-    /////
     res.redirect("/dashboard");
   } catch (err) {
     res.status(404).json(err.message);
@@ -275,18 +270,18 @@ module.exports.logOutRoute = (req, res) => {
   res.redirect("/login");
 };
 
-/////////forgot Pass
+/////////forgot PassWord
 module.exports.forgetPassword = (req, res) => {
   res.render("forgetPassword");
 };
-// module.exports.forgetPasswordPost = async (req, res) => {
-//   let { email } = req.body;
-//   let dataBase = await userModel.findOne({ email: email });
-//   if (dataBase) {
-//     let { email } = dataBase;
-//     let token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
-//     console.log(token);
-//   } else {
-//     res.status(404).json(error.message);
-//   }
-// };
+module.exports.forgetPasswordPost = async (req, res) => {
+  let { email } = req.body;
+  let dataBase = await userModel.findOne({ email: email });
+  if (dataBase) {
+    let { email } = dataBase;
+    let token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+    console.log(token);
+  } else {
+    res.status(404).json(error.message);
+  }
+};
