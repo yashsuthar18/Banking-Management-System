@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking User Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .section {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .transaction-history {
+      text-align: left;
+    }
+
+    .transaction {
+      margin-bottom: 10px;
+    }
+    .scrol{
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard">
+   
+    <img src="/image/{{dataBase.image}}" alt="User Image" style="width: 25%; margin-top: 70px; border-radius: 50%;height: 50%;">
+    <h2>{{dataBase.name}}</h2>
+    <p><b>Bank Balance: </b> Rs : {{dataBase.balance}}</p>
+    <div style="display: flex; justify-content: space-between;">
+      <form action="/dashboard/{{dataBase.id}}/editbal" method="get" >
+        <button type="submit" >Deposit Money</button>
+    </form>
+    <form action="/dashboard/{{dataBase.id}}/withdraw" method="get">
+      <button type="submit">Withdraw Money</button>
+  </form>
+    <form action="/dashboard/transfer" method="get">
+        <button type="submit">Transfer Money</button>
+    </form>
+    <form action="/dashboard/chatUser" method="get">
+        <button type="submit">Chat Others</button>
+    </form>
+    <form action="/dashboard/logout" method="post">
+      <button type="submit">LogOut</button>
+    </form>
+    </div>
+    <div class="section">
+      <h2>Account Details</h2>
+      <p> <b> Account Number:</b> {{dataBase.account}}</p>
+    </div>
+
+    <div class="section transaction-history  scrol">
+      <h2>Transaction History</h2>
+      <div class="transaction scrol">
+      {% for data in history %}
+      {%  if data.to_user == id %}
+      <p> <b>Balance :</b>{{data.tr_amount}}  {{data.tr_type}}</p>
+      {% endif %}
+      {%  endfor %}
+      <!-- Add more transactions as needed -->
+    </div>
+
+  </div>
+
+</body>
+</html>
